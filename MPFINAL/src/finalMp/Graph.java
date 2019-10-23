@@ -1,4 +1,5 @@
 package finalMp;
+
 // Author: Rivera, Ron Matthew R. 
 // BSCS 2-2
 import java.util.*;
@@ -27,10 +28,11 @@ public class Graph {
 		int x = 0;
 		int counter = 0;
 		while (x != -1) {
-			System.out.println("enter 0 for new disconnected node, 1 for new connected node, x > 1 to remove -1 to exit");
+			System.out
+					.println("enter 0 for new disconnected node, 1 for new connected node, x > 1 to remove -1 to exit");
 			x = sc.nextInt();
 			System.out.println();
-			
+
 			// ADD NEW DISCONNECTED NODE NAME IT as n;
 			if (x == 0) {
 
@@ -48,36 +50,51 @@ public class Graph {
 				for (int j = (i - 2); j >= 0; j--) {
 					mainNodes.get(mainNodes.size() - 1).nodes.add(mainNodes.get(j));
 				}
+				// traverse to the subnodes of the latest node and add the latest mainNode
 				for (int k = 0; k < mainNodes.get(mainNodes.size() - 1).nodes.size(); k++) {
 					mainNodes.get(mainNodes.size() - 1).nodes.get(k).nodes.add(mainNodes.get(mainNodes.size() - 1));
+
 				}
 
 				System.out.println(mainNodes.get(mainNodes.size() - 1).nodeName);
 				// Remove nodes where x is divisible by it's degree or if it's remainder is 0
-			} 
+			}
 			// weird part
-			else if (x >1) {
-				for (int l = 0; l<mainNodes.size(); l++) {
-					try {
-						if ( x == (mainNodes.get(l).nodes.size() ) ) {
-						    System.out.println("removing: "+mainNodes.get(l).nodeName);
-							mainNodes.remove(l);
+			else if (x > 1) {
+				int counterx = 0;
+				while(counterx < mainNodes.size())
+				{		// delete nodes
+					if ((mainNodes.get(counterx).nodes.size()) == x/* ||(mainNodes.get(counterx).nodes.size()) == 0 */ ) {
+						System.out.println("removing: " + mainNodes.get(counterx).nodeName);
+						
+						// remove subnodes that contain the mainNode to be removed
+						// case if neighboring nodes is considered 
+						/*
+						 * for(int w = 0; w<mainNodes.size();w++) { for(int y = 0;
+						 * y<mainNodes.get(w).nodes.size();y++) {
+						 * if(mainNodes.get(w).nodes.get(y).nodeName ==
+						 * mainNodes.get(counterx).nodeName) { mainNodes.get(w).nodes.remove(y); } } }
+						 */
+						mainNodes.remove(counterx);
+					//	counterx = 0;
 					}
-					} catch (ArithmeticException e) {
-						System.out.println("dividing by zero is illegal");
-						mainNodes.remove(l);
+					else
+					{
+						counterx++;
 					}
 					
 				}
 
-			}// ||  (x / (mainNodes.get(l).nodes.size()-1)) == 1 || (x % (mainNodes.get(l).nodes.size()-1)) == 0
+
+			} // || (x / (mainNodes.get(l).nodes.size()-1)) == 1 || (x %
+				// (mainNodes.get(l).nodes.size()-1)) == 0
 
 		}
 		for (int i = mainNodes.size() - 1; i >= 0; i--) {
 			System.out.println();
 			if (mainNodes.get(i).nodes != null)
 				System.out.println("Main Node: " + mainNodes.get(i).nodeName);
-				System.out.println("Sub Nodes: " + mainNodes.get(i).nodes.size());
+			System.out.println("Sub Nodes: " + mainNodes.get(i).nodes.size());
 
 		}
 		// graph count
@@ -89,26 +106,5 @@ public class Graph {
 		System.out.println("Graph counter: " + counter);
 
 	}
-	/*
-
-Test cases   
-5 0	   
-0 0 0 11  0	   
-0 1 0 1 0 1 3 -> 4	   
-0 0 0 1 1 1 -> 6	  
-0 0 1 1 0 0 1 1 2 5 7 0 1 -> 6
-0 0 1 1 1 1 5 1 4 3 1 0 0 0 1 2 -> 6     
-0 0 1 1 0 0 1 1 5 2 3 0 0 1 1 0 0 1 1 3 4 0 0 1 1 2 1 1 -> 8      
-0 0 1 1 0 0 1 1 2 5 7 0 1 1 1 1 1 0 1 1 1 1 1 1 1 1 8 -> 14
-	 * 
-	 * */
 
 }
-/*		for (int i = mainNodes.size() - 1; i >= 0; i--) {
-			System.out.println();
-			if (mainNodes.get(i).nodes != null)
-				System.out.println("Main Node: " + mainNodes.get(i).nodeName);
-			for (int j = 0; j < mainNodes.get(i).nodes.size(); j++) {
-				System.out.print("Sub Nodes: " + mainNodes.get(i).nodes.get(j).nodeName);
-			}
-		}*/
