@@ -1,0 +1,5 @@
+class 0
+oflg 2 flog golf
+ele 2 eel lee
+eluc 1 clue
+ogd 2 dog god

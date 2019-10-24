@@ -14,13 +14,6 @@ public class Graph {
 
 	}
 
-	/*
-	 * Directive 0: Add a new disconnected node. Directive 1: Add a new node, and
-	 * connect it to every existing node. Directive m > 1: Remove all nodes whose
-	 * degree (number of neighbors) is divisible by m. Note that 0 is divisible by
-	 * all m, so disconnected nodes are always removed.
-	 */
-
 	public static void main(String[] args) {
 		List<Graph.Node> mainNodes = new ArrayList<Graph.Node>();
 		Scanner sc = new Scanner(System.in);
@@ -60,36 +53,32 @@ public class Graph {
 				// Remove nodes where x is divisible by it's degree or if it's remainder is 0
 			}
 			// weird part
+			//possible conditions to sub: 
+			// (mainNodes.get(counterx).nodes.size() % x) == 0
+			// (mainNodes.get(counterx).nodes.size()) == x)
+			// insert after inside if block
+			/*// if Deleted nodes subtracts the remaining connected nodes degree.
+			 * for(int w = 0; w<mainNodes.size();w++) { for(int y = 0;
+			 * y<mainNodes.get(w).nodes.size();y++) {
+			 * if(mainNodes.get(w).nodes.get(y).nodeName ==
+			 * mainNodes.get(counterx).nodeName) { mainNodes.get(w).nodes.remove(y); } } }
+			 */
 			else if (x > 1) {
 				int counterx = 0;
-				while(counterx < mainNodes.size())
-				{		// delete nodes
-					if ((mainNodes.get(counterx).nodes.size()) == x/* ||(mainNodes.get(counterx).nodes.size()) == 0 */ ) {
+				while (counterx < mainNodes.size()) { // delete nodes
+					// conditions that can be subbed
+					if ((mainNodes.get(counterx).nodes.size()) == x) {
 						System.out.println("removing: " + mainNodes.get(counterx).nodeName);
-						
-						// remove subnodes that contain the mainNode to be removed
-						// case if neighboring nodes is considered 
-						/*
-						 * for(int w = 0; w<mainNodes.size();w++) { for(int y = 0;
-						 * y<mainNodes.get(w).nodes.size();y++) {
-						 * if(mainNodes.get(w).nodes.get(y).nodeName ==
-						 * mainNodes.get(counterx).nodeName) { mainNodes.get(w).nodes.remove(y); } } }
-						 */
 						mainNodes.remove(counterx);
-					//	counterx = 0;
-					}
-					else
-					{
+					} else {
 						counterx++;
 					}
-					
+
 				}
 
+			}
 
-			} // || (x / (mainNodes.get(l).nodes.size()-1)) == 1 || (x %
-				// (mainNodes.get(l).nodes.size()-1)) == 0
-
-		}
+		} // print nodes
 		for (int i = mainNodes.size() - 1; i >= 0; i--) {
 			System.out.println();
 			if (mainNodes.get(i).nodes != null)
@@ -97,6 +86,7 @@ public class Graph {
 			System.out.println("Sub Nodes: " + mainNodes.get(i).nodes.size());
 
 		}
+		
 		// graph count
 		for (int q = 0; q < mainNodes.size(); q++) {
 			if (mainNodes.get(q).nodes.size() > 0) {

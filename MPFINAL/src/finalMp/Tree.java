@@ -1,5 +1,5 @@
 package finalMp;
-
+// Supporting class for MP7
 public class Tree {
 	String k = "^";
 
