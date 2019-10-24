@@ -45,7 +45,7 @@ public class MP10 {
 			}
 			// write data
 			while (answer.equals("y")) {
-				StringJoiner sj = new StringJoiner(" ");
+				StringJoiner sj = new StringJoiner(",");
 				System.out.println("PartNum: ");
 				partnum = input.next();
 				input.nextLine();
@@ -70,7 +70,7 @@ public class MP10 {
 				bf.write(string);
 				bf.newLine();
 			}
-			System.out.println("Transaction Saved Saving to Master Record List...");
+			System.out.println("Transaction SSaving to Master Record List...");
 			bf.close();
 
 		} catch (

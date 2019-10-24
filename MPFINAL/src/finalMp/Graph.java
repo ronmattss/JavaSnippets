@@ -52,6 +52,7 @@ public class Graph {
 				System.out.println(mainNodes.get(mainNodes.size() - 1).nodeName);
 				// Remove nodes where x is divisible by it's degree or if it's remainder is 0
 			}
+			// Remove nodes where x is divisible by it's degree or if it's remainder is 0
 			// weird part
 			//possible conditions to sub: 
 			// (mainNodes.get(counterx).nodes.size() % x) == 0
