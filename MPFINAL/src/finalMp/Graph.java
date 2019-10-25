@@ -50,25 +50,17 @@ public class Graph {
 				}
 
 				System.out.println(mainNodes.get(mainNodes.size() - 1).nodeName);
-				// Remove nodes where x is divisible by it's degree or if it's remainder is 0
+
 			}
 			// Remove nodes where x is divisible by it's degree or if it's remainder is 0
-			// weird part
-			//possible conditions to sub: 
-			// (mainNodes.get(counterx).nodes.size() % x) == 0
-			// (mainNodes.get(counterx).nodes.size()) == x)
-			// insert after inside if block
-			/*// if Deleted nodes subtracts the remaining connected nodes degree.
-			 * for(int w = 0; w<mainNodes.size();w++) { for(int y = 0;
-			 * y<mainNodes.get(w).nodes.size();y++) {
-			 * if(mainNodes.get(w).nodes.get(y).nodeName ==
-			 * mainNodes.get(counterx).nodeName) { mainNodes.get(w).nodes.remove(y); } } }
-			 */
+
 			else if (x > 1) {
 				int counterx = 0;
+				List<Character> chars = new ArrayList<Character>();
 				while (counterx < mainNodes.size()) { // delete nodes
-					// conditions that can be subbed
-					if ((mainNodes.get(counterx).nodes.size()) == x) {
+
+					if ((mainNodes.get(counterx).nodes.size() % x) == 0) {
+						chars.add(mainNodes.get(counterx).nodeName);
 						System.out.println("removing: " + mainNodes.get(counterx).nodeName);
 						mainNodes.remove(counterx);
 					} else {
@@ -76,7 +68,16 @@ public class Graph {
 					}
 
 				}
+				for (int b = 0; b < chars.size(); b++) {
+					for (int w = 0; w < mainNodes.size(); w++) {
+						for (int y = 0; y < mainNodes.get(w).nodes.size(); y++) {
+							if (mainNodes.get(w).nodes.get(y).nodeName == chars.get(b)) {
+								mainNodes.get(w).nodes.remove(y);
+							}
+						}
+					}
 
+				}
 			}
 
 		} // print nodes
@@ -87,7 +88,7 @@ public class Graph {
 			System.out.println("Sub Nodes: " + mainNodes.get(i).nodes.size());
 
 		}
-		
+
 		// graph count
 		for (int q = 0; q < mainNodes.size(); q++) {
 			if (mainNodes.get(q).nodes.size() > 0) {
