@@ -1,10 +1,16 @@
 package mp9;
 
-// Author: Rivera, Ron Matthew R. 
+/*
+ * Authors:
+ * Rivera, Ron Matthew
+ * Canja, Jason
+ * Jacolbia, Patrick
+ * BSCS 2-2
+ * */ 
 // BSCS 2-2
 import java.util.*;
 
-public class Graph {
+public class ConstructGraph {
 	static class Node {
 		char nodeName;
 		List<Node> nodes = new ArrayList<Node>();
@@ -15,7 +21,7 @@ public class Graph {
 	}
 
 	public static void main(String[] args) {
-		List<Graph.Node> mainNodes = new ArrayList<Graph.Node>();
+		List<ConstructGraph.Node> mainNodes = new ArrayList<ConstructGraph.Node>();
 		Scanner sc = new Scanner(System.in);
 		char n = 'A';
 		int x = 0;
@@ -29,13 +35,13 @@ public class Graph {
 			// ADD NEW DISCONNECTED NODE NAME IT as n;
 			if (x == 0) {
 
-				mainNodes.add(new Graph.Node());
+				mainNodes.add(new ConstructGraph.Node());
 				mainNodes.get(mainNodes.size() - 1).nodeName = n;
 				System.out.println(mainNodes.get(mainNodes.size() - 1).nodeName);
 				n += 1;
 				// ADD NEW CONNECTED (to prev. nodes) NODE NAME IT as n;
 			} else if (x == 1) {
-				mainNodes.add(new Graph.Node());
+				mainNodes.add(new ConstructGraph.Node());
 				int i = mainNodes.size();
 				mainNodes.get(mainNodes.size() - 1).nodeName = n;
 				n += 1;
@@ -89,7 +95,7 @@ public class Graph {
 
 		}
 
-		// graph count
+		// ConstructGraph count
 		for (int q = 0; q < mainNodes.size(); q++) {
 			if (mainNodes.get(q).nodes.size() > 0) {
 				counter++;
