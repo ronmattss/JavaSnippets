@@ -1,5 +1,11 @@
-package finalMp;
-//MP8
+package mp8;
+/*
+ * Authors:
+ * Rivera, Ron Matthew
+ * Canja, Jason
+ * Jacolbia, Patrick
+ * BSCS 2-2
+ * */
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.Scanner;

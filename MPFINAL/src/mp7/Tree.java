@@ -1,4 +1,4 @@
-package finalMp;
+package mp7;
 // Supporting class for MP7
 public class Tree {
 	String k = "^";

@@ -1,5 +1,12 @@
-package finalMp;
+package mp7;
 // MP7
+/*
+ * Authors:
+ * Rivera, Ron Matthew
+ * Canja, Jason
+ * Jacolbia, Patrick
+ * BSCS 2-2
+ * */
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -15,7 +22,6 @@ public class BinaryTreeTraversals {
 		//test file input
 		Tree t = new Tree();
 		int counter = 0;
-		//fucking regex
 //		Pattern p = Pattern.compile("[a-zA-Z]");
 //		Matcher m;
 //		String name = "";

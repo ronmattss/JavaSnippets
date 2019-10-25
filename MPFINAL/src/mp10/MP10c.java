@@ -1,5 +1,12 @@
 package mp10;
 
+/*
+ * Authors:
+ * Rivera, Ron Matthew
+ * Canja, Jason
+ * Jacolbia, Patrick
+ * BSCS 2-2
+ * */
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -7,106 +14,174 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.text.Format;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.Scanner;
 
 public class MP10c {
+	public static File input;
+	public static File transaction;
+	public static File isTransacExist;
+	public static BufferedReader br;
+	public static BufferedWriter bf;
+	public static BufferedWriter transacWrite;
+	public static void main(String args[]) throws IOException {
+		
+	
+		
+	Scanner keyboard = new Scanner(System.in);
+	String verify;
+	System.out.println("A - Addition");
+	System.out.println("C - Change");
+	System.out.println("D - Deletion");
+		
+System.out.print("Update code: ");	
+String menu = keyboard.next();
 
-	public static void main(String args[]) {
-		char upCode, chngID, ans = ' ';
-		String prtNum, prtDes;
-		float prtpri;
-	      Format f = new SimpleDateFormat("MM/dd/yy");
-	      String strDate = f.format(new Date());
-		Scanner input = new Scanner(System.in);
 
-		try {
-			FileWriter fw = new FileWriter("TRANSAC.txt", true);
-			BufferedWriter bf = new BufferedWriter(fw);
-			// String header1 = "Update Code " + " PartNumber ";
+input = new File("Master.txt");
+transaction = new File("transac.txt");
+isTransacExist = new File("Error.txt");
+br = new BufferedReader(new FileReader(input));
 
-			do {
-				System.out.println("UPDATE CODE: A - ADD, C - CHANGE, D - DELETE");
-				System.out.println(" ");
-				System.out.print("Update Code: ");
-				upCode = input.next().toUpperCase().charAt(0);
-				input.nextLine();
-				System.out.print("Part Number: ");
-				prtNum = input.nextLine();
+if(!isTransacExist.exists()) {
+	transacWrite = new BufferedWriter(new FileWriter("Error.txt",true));
+	transacWrite.write("UpdateCode" + "\t" + "PartNumber" + "\t" + "ErrorMessage" + "\t" + "Remarks");
+	transacWrite.close();
+}
 
-				if (upCode == 'A') {
-					// bf.append(header1 + " Part Description " + " Part Price " + " Entry Date");
-					System.out.print("Part Desc: ");
-					prtDes = input.nextLine();
-					System.out.print("Part Price: ");
-					prtpri = input.nextFloat();
-					//bf.newLine();
-					bf.append(upCode + "," + prtNum + "," + prtDes + "," + prtpri + "," +strDate );
-					bf.newLine();
-
-				} // UPDATE CODE - A - ADDING NEW RECORD
-
-				if (upCode == 'C') {
-					System.out.println(" ");
-					System.out.println("CHANGE ID: D - DESCRIPTION, P - PRICE");
-					System.out.println(" ");
-					System.out.print("Change ID: ");
-					chngID = input.next().toUpperCase().charAt(0);
-					input.nextLine();
-
-					if (chngID == 'D') {
-						System.out.print("New Desc: ");
-						prtDes = input.nextLine();
-
-						// bf.append(header1 + " Change ID " + " New Description " + " Entry Date");
-						//bf.newLine();
-						bf.append(upCode + "," + prtNum + "," + chngID + "," + prtDes + "," + strDate);
-					}
-
-					else if (chngID == 'P') {
-						System.out.print("New Price: ");
-						prtpri = input.nextFloat();
-
-						// bf.append(header1 + " Change ID " + " New Price " + " Entry Date");
-					//	bf.newLine();
-						bf.append(upCode + "," + prtNum + "," + chngID + "," + prtpri + "," + strDate);
-						bf.newLine();
-
-					}
-
-					else {
-						System.out.println("Error!!! Invalid ID Code");
-					}
-
-				} // UPDATE CODE - C - CHANGE RECORD
-
-				if (upCode == 'D') {
-					bf.newLine();
-					// bf.append(header1 + " Entry Date");
-				//	bf.newLine();
-					bf.append(upCode + "," + prtNum + "," + strDate);
-					bf.newLine();
-
-				} // UPDATE CODE - D - DELETE RECORD
-
-				System.out.println(" ");
-				System.out.print("Again y/n : ");
-				ans = input.next().toUpperCase().charAt(0);
-				input.nextLine();
-				System.out.println(" ");
-
-			} while (ans == 'Y');
-
+switch(menu) {
+case "A" :
+		
+		String tmp= " ";
+		String partnum=" ";
+		String partdesc=" ";
+		String partprice=" ";
+		
+		if(!transaction.exists()) {
+			bf = new BufferedWriter(new FileWriter("transac.txt",true));
+			while((tmp = br.readLine()) != null) {
+					bf.write(tmp);
+					bf.write(System.lineSeparator());	
+			}
 			bf.close();
+		}
+		
+			bf = new BufferedWriter(new FileWriter("transac.txt",true));
+			
+		 char answer = 'y';
+		while(answer == 'y') { 
+			System.out.println("PartNum: ");
+			 partnum = keyboard.next();
+			 partnum += keyboard.nextLine();
+			 System.out.println("PartDesc: ");
+			 partdesc = keyboard.next();
+			 partdesc += keyboard.nextLine();
+			 System.out.println("PartPrice");
+			 partprice = keyboard.next(); 
+			 partprice += keyboard.nextLine();
+			 
+			 bf.write(partnum + "\t" + partdesc + "\t" + partprice); 
+			 bf.write(System.lineSeparator());
+		
+	 	System.out.println("Update Code: a");
+	 	System.out.println("Part Number: "+ partnum);
+	 	System.out.println("Part Description: "+ partdesc);
+	 	System.out.println("Part Price: "+ partprice);
+		System.out.println("Another? Y/N");
+		answer = keyboard.next().charAt(0);
+		 }
 
-		} catch (Exception e) {
+		 bf.close();	
+	 	
+		 break;
+case "C":
+		System.out.print("Enter part number you want to change:");
+		verify = keyboard.next();
+		verify += keyboard.nextLine();
+	try {
+		BufferedReader br = new BufferedReader(new FileReader("transac.txt"));
+		bf = new BufferedWriter(new FileWriter("transac2.txt",true));
+		String tmpText;
+		String putData;
+		try {
+			while((tmpText = br.readLine()) != null) {
+				if(!tmpText.contains(verify)) {
+					bf.write(tmpText);		
+					bf.write(System.lineSeparator());
+				}else{
+					String[] store = tmpText.split("\t");
+					char changeID;
+					System.out.print("Chande ID: ");
+					changeID = keyboard.next().charAt(0);
+					
+					 if(changeID == 'D') {
+						 System.out.println("new PartDesc: ");
+						 partdesc = keyboard.next();
+						 
+						 bf.write(store[0] + "\t" + partdesc + "\t" + store[2]);
+						 bf.write(System.lineSeparator());
+					 }else if(changeID == 'P') {
+						 
+						 System.out.println("new Price: ");
+						 partprice = keyboard.next();
+			
+						 bf.write(store[0] + "\t" + store[1] + "\t" + partprice);
+						 bf.write(System.lineSeparator());
+					 }
+				}
+					
+			}
+			br.close();
+			bf.close();
+			
+			input = new File("transac.txt");
+			input.delete();
+			transaction = new File("transac2.txt");
+			transaction.renameTo(new File("transac.txt"));
+		
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	} catch (FileNotFoundException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+		
+	
+		 break;
+case "D":
+	
+	System.out.print("Enter partnum you want to delete: ");
+	verify = keyboard.next();
+	verify += keyboard.nextLine();
+	
+	BufferedReader br = new BufferedReader(new FileReader("transac.txt"));
+	bf = new BufferedWriter(new FileWriter("transac2.txt",true));
+	String tmpText;
+	String putData;
+	
+		while((tmpText = br.readLine()) != null) {
+			if(!tmpText.contains(verify)) {
+				bf.write(tmpText);		
+				bf.write(System.lineSeparator());	
+			}
+		}
+			
 
-		input.close();
+		br.close();
+		bf.close();
+		
+		input = new File("transac.dat");
+		input.delete();
+		transaction = new File("transac2.dat");
+		transaction.renameTo(new File("transac.dat"));
 
-	}// class
-}
+	
+	
+	
+		break;
+		}//switch
+	
+	}//main
+
+}//class
